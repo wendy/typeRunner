@@ -3,22 +3,13 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <script src="jquery.js"></script>
+    <script src="inbox_generator.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
-    <div class='currentDiv'>
-    <pre>
-    var each = function(collection, iterator) {
-      if (Array.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++) {
-          iterator(collection[i], i, collection);
-        }
-      } else if (typeof collection === 'object') {
-        for (var key in collection) {
-          iterator(collection[key], key, collection);
-        }
-      }
-    };</pre></div>
-    <input type="text" class="txtInput">
+    <div class="container">
+      <div class="currentDiv"></div>
+      <input type="text" class="txtInput">
+    </div>
   </body>
 </html>
