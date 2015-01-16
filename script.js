@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $txtInput = $('.txtInput');
-  var index = 1;
+  var arrayIndex = 1;
+  var spanIndex = 0;
 
   var makePromptElement = function(array) {
     var promptStr = '';
@@ -35,14 +36,15 @@ $(document).ready(function() {
 
   //Input box 
   $txtInput.on('keypress',function(e) {
-    var target = each[index];
-    var nextTarget = each[index + 1];
+    var target = each[arrayIndex];
+    var nextTarget = each[arrayIndex + 1];
 
     var correct = function(extra) {
       $txtInput.val('');
-      $('span:nth-child(' + (index + 1) + ')').removeClass('redBg');
-      index += 1 + extra;
-      $('span:nth-child(' + (index + 1) + ')').addClass('redBg');
+      $($('span')[spanIndex]).removeClass('redBg');
+      arrayIndex += 1 + extra;
+      spanIndex += 1;
+      $($('span')[spanIndex]).addClass('redBg');
     };
 
     var message = $txtInput.val();
@@ -53,9 +55,10 @@ $(document).ready(function() {
       }
     } else if(e.keyCode == 13){
       e.preventDefault()
-      if(nextTarget === "<br>" && message === target) {
+      if(nextTarget === "</p>" && message === target) {
         correct(2);
       }
     }
+
   });
 });
