@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <script src="jquery.js"></script>
-    <script src="inbox_generator.js"></script>
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="currentDiv">
-        <pre>
 <span class="word">var</span> <span class="word">each</span> <span class="word">=</span> <span class="word">function(collection,</span> <span class="word">iterator)</span> <span class="word new-line">{</span>
   <span class="word">if</span> <span class="word">(Array.isArray(collection))</span> <span class="word new-line">{</span>
     <span class="word">for</span> <span class="word">(var</span> <span class="word">i</span> <span class="word">=</span> <span class="word">0;</span> <span class="word">i</span> <span class="word"><</span> <span class="word">collection.length;</span> <span class="word">i++)</span> <span class="word new-line">{</span>
@@ -21,9 +9,3 @@
     <span class="word new-line">}</span>
   <span class="word new-line">}</span>
 <span class="word new-line">};</span>
-       </pre>
-      </div>
-      <input type="text" class="txtInput">
-    </div>
-  </body>
-</html>n
