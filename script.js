@@ -1,43 +1,58 @@
 $(document).ready(function() {
   $txtInput = $('.txtInput');
-  var arrayIndex = 1;
+  var arrayIndex = 0;
   var spanIndex = 0;
 
-  var makePromptElement = function(array) {
-    var promptStr = '';
+ var makePromptElement = function(array) {
+    var newArray = [];
+    var index = 1;
     for (var i = 0; i < array.length; i++) {
-      if (array[i] !== '<p>' && array[i] !== '</p>') {
-        promptStr += '&nbsp;' + '<span>' + array[i] + '</span>';
-      } else {
-        promptStr += array[i];
+      newArray.push('<p class="p' + index + '"> ');
+      var tempArray = array[i].split(' ');
+      for (var j = 0; j < tempArray.length; j++) {
+        if (j === tempArray.length - 1) {
+          newArray.push(tempArray[j]);
+        } else {
+          newArray.push('<span>' + tempArray[j] + '</span>');
+        }      
       }
+      var lastLetter = array[i][array[i].length - 6]
+      if (lastLetter === '{') { 
+        index += 1;
+      } else if (lastLetter === ';' || array[i][0] === '}') {
+        if (array[i + 1] === undefined) {
+        } else if (array[i + 1][0] === '}') {
+          index -= 1;
+        }
+      }  
     }
-    return $.parseHTML(promptStr);
-  };
+    return $.parseHTML(newArray.join(' '));
+  }
 
   //each definition
-  var each = ["<p> var each = function(collection, iterator) { </p> <p>",
-    "if (Array.isArray(collection)) { </p> <p>",
-      "for (var i = 0; i < collection.length; i++) { </p> <p>",
-        "iterator(collection[i], i, collection); </p> <p>",
-      "} </p> <p>",
-    "} else if (typeof collection === 'object') { </p> <p>",
-      "for (var key in collection) { </p> <p>",
-        "iterator(collection[key], key, collection); </p> <p>",
-      "} </p> <p>",
-    "} </p> <p>",
-  "}; </p>"].join(' ').split(' ');
+  var each = ["var each = function(collection, iterator) { </p>",
+    "if (Array.isArray(collection)) { </p>",
+      "for (var i = 0; i < collection.length; i++) { </p>",
+        "iterator(collection[i], i, collection); </p>",
+      "} </p>",
+    "} else if (typeof collection === 'object') { </p>",
+      "for (var key in collection) { </p>",
+        "iterator(collection[key], key, collection); </p>",
+      "} </p>",
+    "} </p>",
+  "}; </p>"];
   
 
   //making the htmlDiv and appending it
   var htmlDiv = makePromptElement(each);
   $('.currentDiv').append(htmlDiv);
-
-
+  $($('span')[0]).addClass('redBg');
+  var eachArray = each.join(' ').split(' ')
+  
   //Input box 
   $txtInput.on('keypress',function(e) {
-    var target = each[arrayIndex];
-    var nextTarget = each[arrayIndex + 1];
+    var target = eachArray[arrayIndex];
+    var nextTarget = eachArray[arrayIndex + 1];
 
     var correct = function(extra) {
       $txtInput.val('');
@@ -56,7 +71,7 @@ $(document).ready(function() {
     } else if(e.keyCode == 13){
       e.preventDefault()
       if(nextTarget === "</p>" && message === target) {
-        correct(2);
+        correct(1);
       }
     }
 

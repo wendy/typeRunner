@@ -21,6 +21,18 @@ p {
   -webkit-margin-end: 0px;
 }
 
+.p2 {
+  margin-left: 1em;
+}
+
+.p3 {
+  margin-left: 2em;
+}
+
+.p4 {
+  margin-left: 3em;
+}
+
 .txtInput {
   color: #555;
   width: 70%;
