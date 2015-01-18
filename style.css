@@ -1,12 +1,46 @@
-
+body {
+  background-image: url(wood.png);
+}
 .container {
   margin: auto;
+  margin-top: 100px;
   width: 50%;
 }
 
 .currentDiv {
-  font-family: Arial,serif;
-  font-size: 20px;
+  color: #fff;
+  font-size: 17px;
+  margin-top:100px;
+  margin: auto;
+  margin-top: 80px;
+  display: block;
+  width: 90%;
+  height: 400px;
+  text-align: center;
+  overflow: hidden;
+}
+
+pre {
+  display: inline-block;
+  text-align: left;
+  height: 400px;
+}
+
+.txtInput {
+  display: block;
+  color: #555;
+  width: 600px;
+  height: 30px;
+  font-family: Arial, serif;
+  font-size: 25px;
+  margin: auto;
+  margin-top: 10px;
+  background: transparent none repeat scroll 0;
+  border-width: medium;
+}
+
+.redBg {
+  background-color: red;
 }
 
 p {
@@ -21,30 +55,7 @@ p {
   -webkit-margin-end: 0px;
 }
 
-.p2 {
-  margin-left: 1em;
-}
-
-.p3 {
-  margin-left: 2em;
-}
-
-.p4 {
-  margin-left: 3em;
-}
-
-.txtInput {
-  color: #555;
-  width: 70%;
-  height: 35px;
-  font-family: Arial,serif;
-  font-size: 25px;
-  margin-top: 2px;
-  margin-bottom: 10px;
-  background: transparent none repeat scroll 0;
-  border-width: medium;
-}
-
-.redBg {
-  background-color: red;
+.duration {
+  display: block;
+  text-align: center;
 }
