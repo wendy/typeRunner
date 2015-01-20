@@ -1,10 +1,17 @@
 body {
   background-image: url(wood.png);
 }
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
 .container {
-  margin: auto;
-  margin-top: 100px;
-  width: 50%;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .currentDiv {
@@ -26,7 +33,7 @@ pre {
   height: 400px;
 }
 
-.txtInput {
+.inputBox {
   display: block;
   color: #555;
   width: 600px;
@@ -58,4 +65,13 @@ p {
 .duration {
   display: block;
   text-align: center;
+}
+
+.timer {
+  display:  block;
+  text-align: right;
+  margin-right: 20px;
+  font-family: Arial, serif;
+  font-size: 25px;
+  color: #fff;
 }

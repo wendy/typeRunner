@@ -1,31 +1,56 @@
 $(document).ready(function() {
-  $txtInput = $('.txtInput');
+  $inputBox = $('.inputBox');
+  var $words = $('.word');
   var arrayIndex = 0;
   var beginTime = null;
-  var endTime = null;
+  var seconds = 0;
+  var minutes = 0;
+  
 
-  var $words = $('.word');
   //making the htmlDiv and appending it
   // var htmlDiv = makePromptElement(each);
   // $('.currentDiv').append(htmlDiv);
   $($words[0]).addClass('redBg');
 
-  
+  //timer
+  var setTimer = function() {
+    start = window.setInterval(function() {
+      seconds += 1;
+      if (seconds === 60) {
+        minutes += 1;
+        seconds = 0;
+      }
+      $('.timer').text(setString(minutes) + ":" + setString(seconds));
+    }, 1000);
+  };
+
+  var setString = function(time) {
+      if (time < 10) {
+        return "0" + time;
+      } else {
+        return time.toString();
+      }
+  };
+
   //Input box 
-  $txtInput.on('keypress',function(e) {
-    if (!beginTime) {
-      beginTime = Date.now();
-    }
+  $inputBox.on('keypress',function(e) {
+    var message = $inputBox.val();
     var target = $($words[arrayIndex]);
+    var wordsLength = $words.length;
+
 
     var correct = function() {
-      $txtInput.val('');
+      $inputBox.val('');
       target.removeClass('redBg');
       arrayIndex += 1;
       $($words[arrayIndex]).addClass('redBg');
     };
 
-    var message = $txtInput.val();
+    if (!beginTime) {
+      beginTime = Date.now();
+      setTimer();
+    }
+
     if (e.keyCode == 32) {
       e.preventDefault();
       if (message === target.text() && !target.hasClass('new-line')) {
@@ -35,12 +60,11 @@ $(document).ready(function() {
       e.preventDefault();
       if(message === target.text() && target.hasClass('new-line')) {
         correct();
-        if (arrayIndex === $words.length) {
-          endTime = Date.now();
-          $('.duration').text("Time took " + (endTime - beginTime)/1000 + "seconds");
+        if (arrayIndex === wordsLength) {
+          clearInterval(start);
+          $('.duration').text("Time took " + (Date.now() - beginTime)/1000 + "seconds");
         }
       }
     }
-
   });
 });
