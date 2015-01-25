@@ -1,15 +1,46 @@
 $(document).ready(function() {
   $inputBox = $('.inputBox');
-  var $words = $('.word');
   var arrayIndex = 0;
   var beginTime = null;
   var seconds = 0;
   var minutes = 0;
   
+  // surround each word in a span with `word` class. Add a `new-line` class for last word in a line
+  var processPrompt = function(data) {
+    var newStr = '';
+    var word = '';
+    var wordRegex = /\S/;
+    for (var i = 0; i < data.length; i++) {
+      if (wordRegex.test(data[i])) {
+        if (data[i] === "'") {
+          word += '\\';
+        }
+        word += data[i];
+      } else {
+        if (word === '') {
+          newStr += data[i];
+        } else {
+          if (data[i] === '\n') {
+            newStr += '<span class="word new-line">' + word + '</span>' + data[i];
+          } else {
+            newStr += '<span class="word">' + word + '</span>' + data[i];
+          }
+          word = '';
+        }
+      }
+    }
+    return newStr;
+  };
 
-  //making the htmlDiv and appending it
-  // var htmlDiv = makePromptElement(each);
-  // $('.currentDiv').append(htmlDiv);
+  // pick a random prompt and show the prompt title
+  var promptName = pickRandomPrompt(window.prompts);
+  $('#promptTitle').text(promptName);
+
+  // decode the content of the prompt into a readable string. Put the string into the pre element
+  var promptContent = window.atob(window.prompts[promptName]);
+  $('#prompt').html(processPrompt(promptContent));
+
+  var $words = $('.word');
   $($words[0]).addClass('redBg');
 
   //timer
